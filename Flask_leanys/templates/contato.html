@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <style>
+        body {
+            background-color: rgb(251, 174, 202);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Menu de navegação */
+        .faixa {
+            background-color: rgb(73, 73, 73);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 1.7cm;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            align-items: center;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+
+        h1 {
+            color: rgb(255, 255, 255);
+            margin: 0;
+            z-index: 1001;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav li {
+            margin-left: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s;
+            z-index: 1001
+        }
+
+        nav a:hover {
+            color: rgb(158, 128, 221);
+        }
+
+        /* Formulário */
+        .contato-container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contato-container h1 {
+            font-size: 36px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            border-bottom: 3px solid rgb(158, 128, 221);
+            padding-bottom: 10px;
+        }
+
+        .contato-container p {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .formulario {
+            margin-bottom: 40px;
+        }
+
+        .formulario h2 {
+            font-size: 25px;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: Arial, sans-serif;
+        }
+
+        .campo {
+            margin-bottom: 20px;
+        }
+
+        .campo label {
+            display: block;
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .campo input, .campo textarea {
+            width: 45%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .campo input:focus, .campo textarea:focus {
+            border-color: rgb(158, 128, 221);
+            outline: none;
+        }
+
+        .btn-enviar {
+            display: block;
+            width: 47%;
+            padding: 12px;
+            font-size: 18px;
+            background-color: rgb(158, 128, 221);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background-color 0.3s;
+        }
+
+        .btn-enviar:hover {
+            background-color: rgb(119, 87, 188);
+        }
+
+        /* Redes sociais */
+        .redes-sociais h2 {
+            font-size: 25px;
+            color: #333;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-family: Arial, sans-serif;
+        }
+
+        .redes-sociais ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .redes-sociais ul li {
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .social-link {
+            font-size: 18px;
+            color: rgb(158, 128, 221);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .social-link:hover {
+            color: #333;
+        }
+
+        .categoria {
+            background: #f9f9f9;
+            padding: 15px;
+            margin: 10px 0px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+            width: 44.5%;
+            margin-top: 0px;
+        }
+
+        .categoria h3 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+            margin-top: 0;
+            text-align: left;
+            font-weight: normal;
+        }
+
+        .redes-sociais p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 8px;
+            text-align: left;
+            margin-top: 5px;
+        }
+
+     /* Imagens */
+
+        img {
+            position: absolute;
+            top: 300px;  
+            right: 20%; 
+            width: 250px;
+        }
+       
+    </style>
+</head>
+<body>
+
+ <!-- Faixa com o nome e o menu -->
+ <div class="faixa">
+    <h1>Nome do App</h1>
+    <nav>
+      <ul>
+          <li><a href="/">Início</a></li>
+          <li><a href="/sobre.html">Sobre</a></li>
+          <li><a href="/contato.html">Contato</a></li>
+      </ul>
+    </nav>
+ </div>
+
+ <!-- Formulário -->
+
+ <div class="contato-container">
+    <h1>Contato</h1>
+    <p>Tem alguma dúvida ou sugestão? Envie uma mensagem e responderemos o mais rápido possível!</p>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/220px-Heart_coraz%C3%B3n.svg.png" 
+         alt="Imagem exemplo">
+
+    <div class="formulario">
+        <h2>Formulário de Contato</h2>
+        <form action="https://formspree.io/f/xyzkpyye" method="POST" target="_blank"> 
+            <div class="campo">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+            </div>
+            <div class="campo">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="campo">
+                <label for="mensagem">Mensagem:</label><br>
+                <textarea id="mensagem" name="mensagem" rows="4" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar</button>
+        </form>
+    </div>
+
+    <!-- Redes sociais -->
+    <div class="redes-sociais">
+        <h2>Ou nos encontre nas redes sociais</h2>
+
+        <div class="categoria">
+            <h3>Desenvolvedora Principal</h3>
+            <p>Leanys Rodríguez Alfonso: 
+                <a href="https://instagram.com/programadora_oficial" target="_blank" class="social-link">Instagram</a> |
+                <a href="https://facebook.com/programadora_oficial" target="_blank" class="social-link">G-mail</a> |
+                <a href="https://linkedin.com/in/programadora_oficial" target="_blank" class="social-link">LinkedIn</a>
+            </p>
+        </div>
+
+        <div class="categoria">
+            <h3>Testagem e sugestões</h3>
+            <p>Nathalia: 
+                <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
+                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
+                <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
+            </p>
+            <p>Cecilia: 
+                <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
+                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
+                <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
+            </p>
+            <p>Kamille: 
+                <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
+                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
+                <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
+            </p>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>
