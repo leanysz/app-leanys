@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questões de Matemática - ENEM</title>
+    <style>
+        /* Estilo para a questão */
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container h2{
+            color: #333;
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-family: 'Poppins';
+            text-transform: none;
+        }
+               
+        .container h3{
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+            font-family: 'Poppins';
+            text-transform: none;
+        }
+
+        .container p{
+            text-align:justify;
+            margin-bottom: 0px;
+            font-size: 16px;
+            color: #555;
+            width:100%;
+        }
+
+        /* Estilo do botão para selecionar alternativas */
+        .alternativa {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .btn-alternativa {
+            width: 45px; /* Aumenta o tamanho do botão circular */
+            height: 45px; /* Aumenta o tamanho do botão circular */
+            margin-right: 12px; /* Espaço entre o botão e o texto */
+            font-size: 18px; /* Mantém o tamanho da letra */
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #3f51b5;
+            border-radius: 50%; /* Tornando o botão redondo */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Centraliza a letra dentro do botão */
+        }
+
+        .btn-alternativa:hover {
+            background-color: #ffffff; /* Mantém o fundo branco */
+            border-color: #2c387c;
+            transform: translateY(-2px);
+        }
+
+        .btn-alternativa:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-selecionado {
+            background-color: #3f51b5;
+            border-color: #2c387c;
+            color: white;
+        }
+
+        #btn-enviar {
+            width: 100%;
+            padding: 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        #btn-enviar:disabled {
+            background-color: #ccc;
+        }
+
+        #btn-enviar:hover {
+            background-color: #2c387c;
+        }
+
+
+        /* Estilo aprimorado para o resultado */
+        #resultado {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            width: 50%;
+            margin-left: 20%;
+        }
+
+        .resultado-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px solid #3f51b5;
+            border-radius: 12px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
+            gap: 10px;
+        }
+
+        .acertou {
+            color: #302b90;
+            background-color: #eaf1ff;
+            border-color: #4b46a4;
+            animation: comemorar 1s ease-out;
+}       
+
+        .errou {
+            color: #dc3545;
+            background-color: #ffecec;
+            border-color: #dc3545;
+            animation: chorar 1s ease-out;
+        }
+
+        .resultado-box i {
+            font-size: 25px;
+        }
+
+        @keyframes comemorar {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes chorar {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+
+        /* Imagem nas alternativas */
+        .imagem {
+            max-width: 100%;
+            height: auto;
+            width: auto
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            .btn-alternativa {
+                font-size: 16px;
+            }
+        }
+
+        /* Estilo para as alternativas */
+        .alternativas {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .alternativa .texto {
+            font-size: 16px; /* Ajustando o tamanho do texto da alternativa para 16px */
+            color: #555;
+            font-family: 'Poppins';
+        }
+
+    </style>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+    <script>
+        fetch('static/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+ <div class="container" data-correct-alternative="{{ questao['correctAlternative'] }}">
+    <h2>Questões de Matemática</h2>
+    <h3>{{ questao["title"] }}</h3>
+    <p>{{ questao["context"] | safe }}</p>
+    <p>{{ questao["alternativesIntroduction"] }}</p>
+    <ul class="alternativas">
+        <li class="alternativa">
+            <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'A')">
+                A
+            </button>
+            {% if questao["alternatives"][0]["text"] %}
+                <span class="texto">{{ questao["alternatives"][0]["text"] }}</span>
+            {% else %}
+                <img src="{{ questao['alternatives'][0]['file'] }}" class="imagem">
+            {% endif %}
+        </li>
+
+        <li class="alternativa">
+            <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'B')">
+                B
+            </button>
+            {% if questao["alternatives"][1]["text"] %}
+                <span class="texto">{{ questao["alternatives"][1]["text"] }}</span>
+            {% else %}
+                <img src="{{ questao['alternatives'][1]['file'] }}" class="imagem">
+            {% endif %}
+        </li>
+
+        <li class="alternativa">
+            <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'C')">
+                C
+            </button>
+            {% if questao["alternatives"][2]["text"] %}
+                <span class="texto">{{ questao["alternatives"][2]["text"] }}</span>
+            {% else %}
+                <img src="{{ questao['alternatives'][2]['file'] }}" class="imagem">
+            {% endif %}
+        </li>
+
+        <li class="alternativa">
+            <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'D')">
+                D
+            </button>
+            {% if questao["alternatives"][3]["text"] %}
+                <span class="texto">{{ questao["alternatives"][3]["text"] }}</span>
+            {% else %}
+                <img src="{{ questao['alternatives'][3]['file'] }}" class="imagem">
+            {% endif %}
+        </li>
+
+        <li class="alternativa">
+            <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'E')">
+                E
+            </button>
+            {% if questao["alternatives"][4]["text"] %}
+                <span class="texto">{{ questao["alternatives"][4]["text"] }}</span>
+            {% else %}
+                <img src="{{ questao['alternatives'][4]['file'] }}" class="imagem">
+            {% endif %}
+        </li>      
+    </ul>    
+
+    <!-- Resultado Container -->
+    <div id="resultado" class="resultado-box">
+        <span class="mensagem"></span>
+    </div>
+
+    <button id="btn-enviar" class="btn btn-success mb-3" onclick="verificarResposta()" disabled>Enviar</button>
+</div>
+
+<script>
+    let alternativaSelecionada = null;
+
+    function selecionarAlternativa(botao, alternativa) {
+        const botoes = document.querySelectorAll('.btn-alternativa');
+        botoes.forEach(b => b.classList.remove('btn-selecionado'));
+
+        botao.classList.add('btn-selecionado');
+        alternativaSelecionada = alternativa;
+
+        document.getElementById("btn-enviar").disabled = false; // Habilita o botão "Enviar"
+        
+        // Reseta o estado do resultado antes de mostrar novamente
+        const resultado = document.getElementById("resultado");
+        resultado.style.opacity = 0; // Faz a caixa desaparecer para reiniciar a animação
+    }
+
+    function verificarResposta() {
+        const respostaCorreta = document.querySelector('.container').getAttribute('data-correct-alternative');
+        const resultado = document.getElementById("resultado");
+
+        // Resetando a caixa de resultado antes de exibir a nova mensagem
+        resultado.style.opacity = 0;
+
+        setTimeout(() => { // Aguarda a caixa desaparecer antes de mostrar o novo resultado
+            if (alternativaSelecionada === respostaCorreta) {
+                resultado.innerHTML = `<i>✔️</i> Você escolheu a alternativa ${alternativaSelecionada}, que é a alternativa certa! 🎉`;
+                resultado.className = "resultado-box acertou";
+            }           
+            else {
+                resultado.innerHTML = `<i>❌</i> Você escolheu a alternativa ${alternativaSelecionada}, mas a alternativa correta era ${respostaCorreta}. 😔`;
+                resultado.className = "resultado-box errou";
+            }   
+
+            resultado.style.opacity = 1;
+        }, 500); // Tempo que o resultado vai ficar invisível (0.5s)
+    }
+</script>
+
+</body>
+</html>

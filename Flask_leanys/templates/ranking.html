@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container h2{
+            color: #333;
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-family: 'Poppins';
+        }
+
+        .user-score {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            color: #555;
+            width:100%
+        }
+
+        .user-score .highlight {
+            font-weight: 700;
+            font-size: 24px;
+            color: #313f8c;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        th {
+            background-color: #156092;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        td {
+            background-color: #ebeced;  /* Linhas mais escuras */
+            color: #2c3e50;
+            transition: background-color 0.3s ease;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #d8dce3;  /* Linhas pares ainda mais escuras */
+        }
+
+        tr:hover {
+            background-color: #1abc9c;
+            cursor: pointer;
+            color: white;
+        }
+
+        .highlight-row {
+            background-color: #f39c12 !important;
+            color: white;
+        }
+
+        .same-position-score {
+            background-color: #e74c3c; /* Cor de fundo para destacar */
+            color: white; /* Cor do texto */
+        }
+
+        .ranking-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            justify-content: center; 
+            gap: 10px;
+            margin-left: 50px;
+        }
+
+        .ranking-container .position {
+            display: flex;
+            align-items: center;
+        }
+        
+        .ranking-container img {
+            width: 30px; 
+            height: auto;
+            margin-left: 10px;
+        }
+
+
+        .footer {
+            background-color: #222222;
+            color: white;
+            text-align: center;
+            padding: 3px;
+            font-size: 14px;
+            margin-top: 50px;
+            margin-bottom: 0;
+        }
+
+        /* Responsividade */
+        @media screen and (max-width: 768px) {
+            .ranking-container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            th, td {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+      <div id="header"></div>
+
+    <script>
+        fetch('/header')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+    
+    <div class="container">
+        <h2>Ranking de Pontuação</h2>
+        <div class="user-score">
+            Bem-vindo ao ranking! Sua pontuação atual é: <span class="highlight"> {{ pontuacao }}</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Usuário</th>
+                    <th>Pontuação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in ranking %}
+                    <tr class="{{ 'highlight-row' if usuario.usuario == usuario_logado else '' }} 
+                                {{ 'same-position-score' if usuario.pontuacao == loop.index - 1 else '' }}">
+                        <td>
+                            {% if loop.index == 1 %}
+                                <div class="ranking-container">
+                                    1º
+                                    <img src="static/ouro.png" alt="Medalha de Ouro">
+                                </div>
+                            {% elif loop.index == 2 %}
+                                <div class="ranking-container">
+                                    2º
+                                    <img src="static/prata.png" alt="Medalha de Prata">
+                                </div>
+                            {% elif loop.index == 3 %}
+                                <div class="ranking-container">
+                                    3º
+                                    <img src="static/bronze.png" alt="Medalha de Bronze">
+                                </div>
+                            {% else %}
+                                {{ loop.index }}º
+                            {% endif %}
+                        </td>
+                        <td>{{ usuario.usuario }}</td>
+                        <td>{{ usuario.pontuacao }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 LIGA ENEM | A aprovação é Aqui!</p>
+    </div>
+  
+</body>
+</html>

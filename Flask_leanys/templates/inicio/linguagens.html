@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linguagens, Códigos e suas Tecnologias</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            }
+
+        .container h2{
+            color: #333;
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-family: 'Poppins';
+        }
+
+        .container p{
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #555;
+            width:100%
+        }
+
+        canvas {
+            max-width: 400px;
+            max-height: 400px;
+            transition: transform 0.1s ease-in-out;
+            margin-top: -20px;
+            margin-left: 35px;
+        }
+
+        canvas:hover {
+            transform: translateX(7px) scale(1.07);
+        }
+
+        .chart-container {
+            margin-top: 20px;
+            width: 400px;
+            height: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            align-self: flex-start; /* Move o gráfico mais para cima */
+        }
+
+        .chart-container h3{
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-family: 'Poppins';
+            width: 50%;
+            white-space: nowrap;
+            margin-left: 60px;
+            margin-top: -20px;
+        }
+
+        .chart-container p{
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            gap: 20px;  /* Espaçamento entre os tópicos */
+            width: 40%;
+        }
+
+        .section h2 {
+            font-size: 30px;
+            color: #444;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .topic {
+            background-color: #5c6bc0;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            white-space: nowrap;
+            
+        }
+
+        .topic:hover {
+            background-color: #3f51b5;
+            transform: translateX(5px) scale(1.03);
+        }
+        
+    </style>
+</head>
+<body>
+  
+  <div id="header"></div>
+
+  <script>
+      fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('header').innerHTML = data;
+          });
+  </script>
+
+    
+    <div class="container"> 
+        <h2>Linguagens, Códigos e suas Tecnologias 📖</h2>
+        <p>Escolha um dos tópicos abaixo:</p>
+
+        <div class="section">
+            <a href="/portugues.html" class="topic">Questões de Português</a>
+            <a href="/literatura.html" class="topic">Questões de Literatura</a>
+            <a href="/espanhol.html" class="topic">Questões de Espanhol</a>
+            <a href="/ingles.html" class="topic">Questões de Inglês</a>
+            <a href="/questoes-linguagens.html" class="topic">Questões de Linguagens</a>
+        </div>
+    
+        <div class="chart-container">
+            <h3>Como foi seu Desempenho?</h3>
+            <p>Para conhecer a porcentagem de acertos, clique em cima do ponto de cada matéria.</p>
+            <canvas id="radarChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        const dataValues = [80, 70, 90, 60];
+        const labels = ['Português', 'Literatura', 'Espanhol', 'Inglês'];
+
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '',
+                    data: dataValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        pointLabels: {
+                            display: true,
+                            font: {
+                                size: 16, // Aumenta o tamanho do texto
+                                weight: 'bold' // Deixa o texto mais destacado
+                            },
+                            color:'#000'
+
+                        },
+                        ticks: {
+                            display: false
+                        },
+                        grid: {
+                            color: 'rgba(36, 36, 36, 0.3)', // Cor das linhas radiais, mais escuras
+                            lineWidth: 1 // Espessura das linhas
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        enabled: true,
+                        callbacks: {
+                            label: function (tooltipItem) {
+                                let value = tooltipItem.raw;
+                                let category = "";
+                                if (value < 15) {
+                                    category = "Baixo";
+                                } else if (value < 50) {
+                                    category = "Médio Baixo";
+                                } else if (value < 75) {
+                                    category = "Médio Alto";
+                                } else {
+                                    category = "Alto";
+                                }
+                                return `${labels[tooltipItem.dataIndex]}: ${value}% (${category})`;
+                            }
+                        }
+                    }
+                },
+                animation: {
+                    duration: 500,
+                    easing: 'easeInOutBounce'
+                },
+                hover: {
+                    mode: 'nearest',
+                    animationDuration: 400,
+                    onHover: (event, chartElement) => {
+                        if (chartElement.length > 0) {
+                            event.target.style.cursor = 'pointer';
+                            chartElement[0].element.active = true; // Ativa a animação no ponto
+                        } else {
+                            event.target.style.cursor = 'default';
+                        }
+                    }
+                }
+                
+            }
+        });
+        
+    </script>
+
+</body>
+</html>

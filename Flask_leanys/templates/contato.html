@@ -5,77 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato</title>
     <style>
-        body {
-            background-color: rgb(251, 174, 202);
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Menu de navegação */
-        .faixa {
-            background-color: rgb(73, 73, 73);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 1.7cm;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            align-items: center;
-            box-sizing: border-box;
-            z-index: 1000;
-        }
-
-        h1 {
-            color: rgb(255, 255, 255);
-            margin: 0;
-            z-index: 1001;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav li {
-            margin-left: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            transition: color 0.3s;
-            z-index: 1001
-        }
-
-        nav a:hover {
-            color: rgb(158, 128, 221);
-        }
-
+       
         /* Formulário */
         .contato-container {
             width: 80%;
             max-width: 1200px;
-            margin: 100px auto 50px;
+            margin: 50px auto 50px;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
         }
-
+ 
         .contato-container h1 {
             font-size: 36px;
             color: #333;
             text-align: center;
             margin-bottom: 20px;
             text-transform: uppercase;
-            border-bottom: 3px solid rgb(158, 128, 221);
+            border-bottom: 3px solid #3f51b5;
             padding-bottom: 10px;
+            font-family: 'Poppins';
         }
 
         .contato-container p {
@@ -85,8 +39,15 @@
             color: #555;
         }
 
+        .contato-titulo {
+            width: 100%; /* Faz o título e o parágrafo ocuparem toda a largura */
+            text-align: center; /* Mantém alinhado ao centro */
+        }
+
+
         .formulario {
             margin-bottom: 40px;
+            width: 48%;
         }
 
         .formulario h2 {
@@ -94,7 +55,7 @@
             color: #333;
             margin-bottom: 20px;
             text-transform: uppercase;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
         }
 
         .campo {
@@ -109,7 +70,7 @@
         }
 
         .campo input, .campo textarea {
-            width: 45%;
+            width: 95%;
             padding: 12px;
             font-size: 16px;
             border: 1px solid #ddd;
@@ -119,16 +80,16 @@
         }
 
         .campo input:focus, .campo textarea:focus {
-            border-color: rgb(158, 128, 221);
+            border-color: #5c6bc0;
             outline: none;
         }
 
         .btn-enviar {
             display: block;
-            width: 47%;
+            width: 100%;
             padding: 12px;
             font-size: 18px;
-            background-color: rgb(158, 128, 221);
+            background-color: #5c6bc0;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -138,16 +99,19 @@
         }
 
         .btn-enviar:hover {
-            background-color: rgb(119, 87, 188);
+            background-color: #3f51b5;
         }
 
         /* Redes sociais */
         .redes-sociais h2 {
             font-size: 25px;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             text-transform: uppercase;
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins';
+            width: 48%;
+            white-space: nowrap;
+            margin-right: 60px;
         }
 
         .redes-sociais ul {
@@ -162,8 +126,8 @@
         }
 
         .social-link {
-            font-size: 18px;
-            color: rgb(158, 128, 221);
+            font-size: 16px;
+            color:#5c6bc0;
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -175,66 +139,57 @@
         .categoria {
             background: #f9f9f9;
             padding: 15px;
-            margin: 10px 0px;
             border-radius: 10px;
-            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-            width: 44.5%;
-            margin-top: 0px;
+            box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            margin-right: 20px;
         }
 
         .categoria h3 {
             color: #333;
-            font-size: 22px;
-            margin-bottom: 20px;
-            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 15px;
+            margin-top: 15px;
             text-align: left;
             font-weight: normal;
+            white-space: nowrap;
         }
 
         .redes-sociais p {
-            font-size: 18px;
+            font-size: 16px;
             color: #555;
             margin-bottom: 8px;
             text-align: left;
             margin-top: 5px;
-        }
-
-     /* Imagens */
-
-        img {
-            position: absolute;
-            top: 300px;  
-            right: 20%; 
-            width: 250px;
         }
        
     </style>
 </head>
 <body>
 
- <!-- Faixa com o nome e o menu -->
- <div class="faixa">
-    <h1>Nome do App</h1>
-    <nav>
-      <ul>
-          <li><a href="/">Início</a></li>
-          <li><a href="/sobre.html">Sobre</a></li>
-          <li><a href="/contato.html">Contato</a></li>
-      </ul>
-    </nav>
- </div>
+    <div id="header"></div>
+
+    <script>
+        fetch('/header')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
 
  <!-- Formulário -->
 
  <div class="contato-container">
-    <h1>Contato</h1>
-    <p>Tem alguma dúvida ou sugestão? Envie uma mensagem e responderemos o mais rápido possível!</p>
+    <div class="contato-titulo">
+        <h1>Contato</h1>
+        <p>Tem alguma dúvida ou sugestão? Envie uma mensagem e responderemos o mais rápido possível!</p>
+    </div>
 
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/220px-Heart_coraz%C3%B3n.svg.png" 
-         alt="Imagem exemplo">
 
     <div class="formulario">
-        <h2>Formulário de Contato</h2>
+        <h2>Formulário de Contato 📩</h2>
         <form action="https://formspree.io/f/xyzkpyye" method="POST" target="_blank"> 
             <div class="campo">
                 <label for="nome">Nome:</label>
@@ -255,13 +210,12 @@
 
     <!-- Redes sociais -->
     <div class="redes-sociais">
-        <h2>Ou nos encontre nas redes sociais</h2>
+        <h2>Nos encontre nas redes sociais 🌐</h2>
 
         <div class="categoria">
             <h3>Desenvolvedora Principal</h3>
             <p>Leanys Rodríguez Alfonso: 
                 <a href="https://instagram.com/programadora_oficial" target="_blank" class="social-link">Instagram</a> |
-                <a href="https://facebook.com/programadora_oficial" target="_blank" class="social-link">G-mail</a> |
                 <a href="https://linkedin.com/in/programadora_oficial" target="_blank" class="social-link">LinkedIn</a>
             </p>
         </div>
@@ -270,23 +224,19 @@
             <h3>Testagem e sugestões</h3>
             <p>Nathalia: 
                 <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
-                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
                 <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
             </p>
             <p>Cecilia: 
                 <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
-                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
                 <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
             </p>
             <p>Kamille: 
                 <a href="https://instagram.com/testagem" target="_blank" class="social-link">Instagram</a> |
-                <a href="https://facebook.com/testagem" target="_blank" class="social-link">G-mail</a> |
                 <a href="https://linkedin.com/in/testagem" target="_blank" class="social-link">LinkedIn</a>
             </p>
         </div>
     </div>
+
     
-
-
 </body>
 </html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temas de Redação do ENEM</title>
+    <style>
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container h2{
+            color: #333;
+            font-size: 25px;
+            text-align: left;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-family: 'Poppins';
+        }
+
+        .container p{
+            text-align: left;
+            margin-bottom: -10px;
+            font-size: 18px;
+            color: #555;
+            width:100%
+        }
+
+        .container-g {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 0px;
+            padding: 0 15px;
+        }
+
+        .section-title {
+            margin-top: 40px;          
+            font-size: 25px;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-family: 'Poppins';
+        }
+
+        .tema-lista {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+    
+        .tema-item {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tema-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tema-item h3 {
+            font-size: 1.4rem;
+            margin: 0 0 15px;
+            color: #3f51b5;
+        }
+
+        .tema-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        @media (max-width: 1024px) {
+            .tema-lista {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tema-lista {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tema-lista {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <script>
+        fetch('/header')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+  
+ 
+    <div class="container"> 
+        <h2>Temas de Redação do ENEM</h2>
+        <p>Explore diversos temas para treinar sua redação e se preparar para o exame.</p>
+    <div class="container-g">
+        <!-- Seção Temas Antigos -->
+        <div class="section-title">Temas Antigos</div>
+        <div class="tema-lista">
+            <div class="tema-item">
+                <h3>2024: Desafios para a valorização da herança africana no Brasil</h3>
+                <p>Reflexão sobre como a valorização da herança africana pode contribuir para a construção de uma sociedade mais justa e igualitária.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2023: Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil</h3>
+                <p>Discussão sobre como o trabalho de cuidado realizado pelas mulheres é muitas vezes invisibilizado e desvalorizado na sociedade brasileira.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2022: Desafios para a valorização de comunidades e povos tradicionais no Brasil</h3>
+                <p>Reflexão sobre a importância da valorização de comunidades tradicionais para a preservação da diversidade cultural e ambiental do Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2021: Invisibilidade e registro civil: garantia de acesso à cidadania no Brasil</h3>
+                <p>Discussão sobre como a falta de registro civil impacta a cidadania e o acesso a direitos fundamentais no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2020: O estigma associado às doenças mentais na sociedade brasileira (Enem impresso)</h3>
+                <p>Reflexão sobre o estigma que envolve as doenças mentais no Brasil e como isso afeta a saúde mental e os direitos dos indivíduos.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2020: O desafio de reduzir as desigualdades entre as regiões do Brasil (Enem digital)</h3>
+                <p>Discussão sobre as desigualdades regionais no Brasil e as ações necessárias para reduzir as disparidades entre as regiões.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2019: Democratização do acesso ao cinema no Brasil</h3>
+                <p>Reflexão sobre a importância da democratização do acesso ao cinema e como isso pode contribuir para o enriquecimento cultural no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2018: Manipulação do comportamento do usuário pelo controle de dados na Internet</h3>
+                <p>Discussão sobre como o controle de dados na internet afeta o comportamento dos usuários e suas escolhas na sociedade digital.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2017: Desafios para a formação educacional de surdos no Brasil</h3>
+                <p>Reflexão sobre os desafios enfrentados por surdos para o acesso à educação de qualidade e a promoção da inclusão educacional no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2016: Caminhos para combater a intolerância religiosa no Brasil</h3>
+                <p>Discussão sobre as formas de combater a intolerância religiosa e promover o respeito à diversidade religiosa no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2015: A persistência da violência contra a mulher na sociedade brasileira</h3>
+                <p>Reflexão sobre os desafios para combater a violência contra a mulher no Brasil e as políticas públicas necessárias para enfrentar esse problema.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2014: Publicidade infantil em questão no Brasil</h3>
+                <p>Discussão sobre os impactos da publicidade infantil na formação das crianças e as implicações éticas dessa prática no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2013: Efeitos da implantação da Lei Seca no Brasil</h3>
+                <p>Reflexão sobre os efeitos da Lei Seca na redução de acidentes e mortes no trânsito no Brasil e os desafios para a efetiva aplicação dessa lei.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2012: Movimento imigratório para o Brasil no século 21</h3>
+                <p>Discussão sobre os movimentos imigratórios para o Brasil e suas consequências sociais, econômicas e culturais no século XXI.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2011: Viver em rede no século XXI: os limites entre o público e o privado</h3>
+                <p>Reflexão sobre os limites entre o público e o privado nas redes sociais e como isso afeta a vida das pessoas no século XXI.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2010: O trabalho na construção da dignidade humana</h3>
+                <p>Discussão sobre a importância do trabalho para a dignidade humana e os direitos dos trabalhadores no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2009: O indivíduo frente à ética nacional</h3>
+                <p>Reflexão sobre o papel do indivíduo na construção e promoção de uma ética nacional voltada para o bem-estar coletivo.</p>
+            </div>
+            <div class="tema-item">
+                <h3>2008: Como preservar a floresta Amazônica</h3>
+                <p>Discussão sobre os desafios e as soluções para preservar a floresta Amazônica e garantir a sustentabilidade ambiental no Brasil.</p>
+            </div>
+        </div>
+
+        <!-- Seção Sugestões de Temas -->
+        <div class="section-title">Sugestões de Temas</div>
+        <div class="tema-lista">
+            <div class="tema-item">
+                <h3>O impacto das redes sociais na sociedade</h3>
+                <p>Discuta o papel das redes sociais nas relações sociais, comportamento e comunicação na sociedade moderna.</p>
+            </div>
+            <div class="tema-item">
+                <h3>Desafios da educação no Brasil</h3>
+                <p>Reflexão sobre os principais desafios enfrentados pelo sistema educacional no Brasil e suas possíveis soluções.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A preservação ambiental e o futuro do planeta</h3>
+                <p>Explore as ações necessárias para proteger o meio ambiente e garantir a sustentabilidade para as futuras gerações.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O papel da tecnologia no cotidiano</h3>
+                <p>Reflexão sobre como a tecnologia transforma as rotinas pessoais, profissionais e sociais no mundo moderno.</p>
+            </div>
+            <div class="tema-item">
+                <h3>Desigualdade social e suas consequências</h3>
+                <p>Analise as causas e efeitos da desigualdade social no Brasil e proponha soluções para reduzir essa disparidade.</p>
+            </div>
+            <div class="tema-item">
+                <h3>Os desafios da saúde pública no Brasil</h3>
+                <p>Reflexão sobre os principais problemas enfrentados pelo sistema de saúde pública brasileiro e possíveis melhorias.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O futuro do trabalho e a automação</h3>
+                <p>Analise os impactos da automação e da inteligência artificial no mercado de trabalho e como as pessoas podem se adaptar.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O papel da mulher na sociedade contemporânea</h3>
+                <p>Discussão sobre as conquistas e desafios das mulheres na sociedade atual, incluindo igualdade de gênero e feminismo.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O avanço da ciência e suas implicações éticas</h3>
+                <p>Reflexão sobre as questões éticas envolvidas nos avanços científicos e tecnológicos, como clonagem e edição genética.</p>
+            </div>
+            <div class="tema-item">
+                <h3>Violência urbana e políticas públicas de segurança</h3>
+                <p>Discussão sobre a violência nas grandes cidades e as medidas que podem ser adotadas pelo governo para combatê-la.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A importância da educação para a cidadania</h3>
+                <p>Reflexão sobre como a educação contribui para a formação de cidadãos conscientes e para a democracia.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A crise da água no Brasil</h3>
+                <p>Discussão sobre a escassez de água no Brasil e as ações necessárias para garantir o uso sustentável desse recurso natural.</p>
+            </div>
+            <div class="tema-item">
+                <h3>Redução da maioridade penal</h3>
+                <p>Reflexão sobre os prós e contras da proposta de redução da maioridade penal no Brasil e suas implicações sociais.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A inclusão de pessoas com deficiência no mercado de trabalho</h3>
+                <p>Discussão sobre as barreiras e oportunidades para a inclusão de pessoas com deficiência no ambiente profissional.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A influência da mídia na formação da opinião pública</h3>
+                <p>Analise o papel da mídia na formação de opiniões e como isso pode influenciar a sociedade de maneira geral.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A modernização das infraestruturas no Brasil</h3>
+                <p>Reflexão sobre as mudanças necessárias nas infraestruturas urbanas para atender às necessidades do crescimento populacional.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O uso excessivo de agrotóxicos na agricultura</h3>
+                <p>Discussão sobre os riscos e as alternativas para o uso de agrotóxicos na produção agrícola no Brasil.</p>
+            </div>
+            <div class="tema-item">
+                <h3>O impacto da pandemia no ensino no Brasil</h3>
+                <p>Analise os efeitos da pandemia de COVID-19 no ensino e as mudanças necessárias para o futuro da educação.</p>
+            </div>
+            <div class="tema-item">
+                <h3>A importância da preservação da cultura brasileira</h3>
+                <p>Reflexão sobre como a preservação cultural pode influenciar a identidade nacional e o fortalecimento do Brasil no mundo.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
