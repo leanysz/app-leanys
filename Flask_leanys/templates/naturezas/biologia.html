@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questões de Biologia</title>
+    <style>
+        /* Estilo para a questão */
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto 50px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .container h2{
+            color: #333;
+            font-size: 22px;
+            text-align: center;
+            margin-bottom: 0;
+            border-bottom: 3px solid #3f51b5;
+            padding-bottom: 10px;
+            font-family: 'Poppins';
+            text-transform: none;
+        }
+               
+        .container h3{
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+            font-family: 'Poppins';
+            text-transform: none;
+        }
+
+        .container p{
+            text-align:justify;
+            margin-bottom: 0px;
+            font-size: 16px;
+            color: #555;
+            width:100%;
+        }
+
+        /* Estilo do botão para selecionar alternativas */
+        .alternativa {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .btn-alternativa {
+            width: 45px; /* Aumenta o tamanho do botão circular */
+            height: 45px; /* Aumenta o tamanho do botão circular */
+            margin-right: 12px; /* Espaço entre o botão e o texto */
+            font-size: 18px; /* Mantém o tamanho da letra */
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #3f51b5;
+            border-radius: 50%; /* Tornando o botão redondo */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Centraliza a letra dentro do botão */
+        }
+
+        .btn-alternativa:hover {
+            background-color: #ffffff; /* Mantém o fundo branco */
+            border-color: #2c387c;
+            transform: translateY(-2px);
+        }
+
+        .btn-alternativa:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-selecionado {
+            background-color: #3f51b5;
+            border-color: #2c387c;
+            color: white;
+        }
+
+        #botoes-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        #btn-enviar {
+            width: 100%;
+            padding: 15px;
+            background-color: #3f51b5;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        #btn-enviar:disabled {
+            background-color: #ccc;
+        }
+
+        #btn-enviar:hover {
+            background-color: #2c387c;
+        }
+
+        #btn-enviar.clicado {
+            background-color: #2c387c;  /* Cor do botão após clicar */
+            border-color: #1a237e;  /* Cor da borda */
+            cursor: default;  /* Impede a mudança de cursor */
+        }
+
+        #btn-enviar.reduzido {
+            width: 85%;
+        }
+
+        #btn-proxima {
+            display: none;
+            width: 50px;  /* Define uma largura fixa */
+            height: 50px; /* Define uma altura fixa */
+            padding: 0;   /* Remove o padding interno para manter o formato redondo */
+            background-color: #ffffff;
+            border: none;
+            border-radius: 50%; /* Torna o botão redondo */
+            cursor: pointer;
+            margin-right: 50px;
+        }
+
+        #btn-proxima:hover {
+            background-color: #ffffff;
+        }
+
+        #btn-proxima img {
+            width: 55px;  /* Define o tamanho da imagem */
+            height: 55px; /* Define o tamanho da imagem */
+            object-fit: contain; /* Ajusta a imagem sem distorcer */ 
+        }
+
+
+        /* Estilo aprimorado para o resultado */
+        #resultado {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            width: 50%;
+            margin-left: 17%;
+        }
+
+        .resultado-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px solid #3f51b5;
+            border-radius: 12px;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
+            gap: 10px;
+        }
+
+        .acertou {
+            color: #302b90;
+            background-color: #eaf1ff;
+            border-color: #4b46a4;
+            animation: comemorar 1s ease-out;
+        }       
+
+        .errou {
+            color: #dc3545;
+            background-color: #ffecec;
+            border-color: #dc3545;
+            animation: chorar 1s ease-out;
+        }
+
+        .resultado-box i {
+            font-size: 25px;
+        }
+
+        @keyframes comemorar {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes chorar {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Imagem nas alternativas */
+        .imagem {
+            max-width: 100%;
+            height: auto;
+            width: auto
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 20px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            h3 {
+                font-size: 18px;
+            }
+
+            .btn-alternativa {
+                font-size: 16px;
+            }
+        }
+
+        /* Estilo para as alternativas */
+        .alternativas {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+        }
+
+        .alternativa .texto {
+            font-size: 16px; /* Ajustando o tamanho do texto da alternativa para 16px */
+            color: #555;
+            font-family: 'Poppins';
+        }
+
+    </style>
+</head>
+
+<body>
+
+  <div id="header"></div>
+
+  <script>
+      fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('header').innerHTML = data;
+          });
+  </script>
+
+
+    <div class="container" data-correct-alternative="{{ questao['correctAlternative'] }}">
+        <h2>Questões de Biologia</h2>
+        <h3>{{ questao["title"] }}</h3>
+        <p>{{ questao["context"] | safe }}</p>
+        <p>{{ questao["alternativesIntroduction"] }}</p>
+        <ul class="alternativas">
+            <li class="alternativa">
+                <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'A')">
+                    A
+                </button>
+                {% if questao["alternatives"][0]["text"] %}
+                    <span class="texto">{{ questao["alternatives"][0]["text"] }}</span>
+                {% else %}
+                    <img src="{{ questao['alternatives'][0]['file'] }}" class="imagem">
+                {% endif %}
+            </li>
+    
+            <li class="alternativa">
+                <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'B')">
+                    B
+                </button>
+                {% if questao["alternatives"][1]["text"] %}
+                    <span class="texto">{{ questao["alternatives"][1]["text"] }}</span>
+                {% else %}
+                    <img src="{{ questao['alternatives'][1]['file'] }}" class="imagem">
+                {% endif %}
+            </li>
+    
+            <li class="alternativa">
+                <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'C')">
+                    C
+                </button>
+                {% if questao["alternatives"][2]["text"] %}
+                    <span class="texto">{{ questao["alternatives"][2]["text"] }}</span>
+                {% else %}
+                    <img src="{{ questao['alternatives'][2]['file'] }}" class="imagem">
+                {% endif %}
+            </li>
+    
+            <li class="alternativa">
+                <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'D')">
+                    D
+                </button>
+                {% if questao["alternatives"][3]["text"] %}
+                    <span class="texto">{{ questao["alternatives"][3]["text"] }}</span>
+                {% else %}
+                    <img src="{{ questao['alternatives'][3]['file'] }}" class="imagem">
+                {% endif %}
+            </li>
+    
+            <li class="alternativa">
+                <button class="btn-alternativa" onclick="selecionarAlternativa(this, 'E')">
+                    E
+                </button>
+                {% if questao["alternatives"][4]["text"] %}
+                    <span class="texto">{{ questao["alternatives"][4]["text"] }}</span>
+                {% else %}
+                    <img src="{{ questao['alternatives'][4]['file'] }}" class="imagem">
+                {% endif %}
+            </li>      
+        </ul>     
+
+       <!-- Resultado Container -->
+        <div id="resultado" class="resultado-box">
+            <span class="mensagem"></span>
+        </div>
+
+        <!-- Contêiner para os botões -->
+        <div id="botoes-container">
+            <button id="btn-enviar" class="btn btn-success mb-3" onclick="verificarResposta()" disabled>Enviar</button>
+
+            <!-- Botão Próxima Questão -->
+            <button id="btn-proxima" class="btn btn-info" onclick="proximaQuestao()"><img src="static/proximo-botao.png" alt="Medalha de Ouro"></button>
+        </div>
+
+
+    <script>
+        let acertou = null;
+        let alternativaSelecionada = null;
+    
+        // Função para selecionar uma alternativa
+        function selecionarAlternativa(botao, alternativa) {
+            const botoes = document.querySelectorAll('.btn-alternativa');
+            botoes.forEach(b => {
+                // Remove a classe selecionada apenas dos botões que não foram clicados
+                if (!b.classList.contains('btn-selecionado')) {
+                    b.classList.remove('btn-selecionado');
+                }
+            });
+    
+            // Marca a alternativa como selecionada
+            botao.classList.add('btn-selecionado');
+            alternativaSelecionada = alternativa;
+            document.getElementById("btn-enviar").disabled = false;
+    
+            const resultado = document.getElementById("resultado");
+            resultado.style.opacity = 0;  // Esconde a mensagem temporariamente
+        }
+    
+        // Função para verificar a resposta escolhida
+        function verificarResposta() {
+            const respostaCorreta = document.querySelector('.container').getAttribute('data-correct-alternative');
+            const resultado = document.getElementById("resultado");
+            const btnEnviar = document.getElementById("btn-enviar");
+            const btnProxima = document.getElementById("btn-proxima");
+    
+            resultado.style.opacity = 0;  // Esconde a mensagem temporariamente
+    
+            // 🟢 Desabilitar botão "Enviar Resposta" após clicar
+            btnEnviar.classList.add("clicado");
+            btnEnviar.disabled = true;  // Desabilita o botão após clicar
+    
+            // Desabilitar as alternativas após resposta, mantendo a classe selecionada
+            const botoes = document.querySelectorAll('.btn-alternativa');
+            botoes.forEach(b => {
+                if (!b.classList.contains('btn-selecionado')) {
+                    b.disabled = true;  // Desabilita os botões não selecionados
+                } else {
+                    b.disabled = true;  // Desabilita o botão selecionado sem remover a classe
+                }
+            });
+    
+            setTimeout(() => {
+                
+                if (alternativaSelecionada === respostaCorreta) {
+                    acertou = true;
+
+                    resultado.innerHTML = `<i>✔️</i> Você escolheu a alternativa ${alternativaSelecionada}, que é a correta! 🎉`;
+                    resultado.className = "resultado-box acertou";
+                } 
+                
+                else {
+                    acertou = false
+    
+                    resultado.innerHTML = `<i>❌</i> Você escolheu a alternativa ${alternativaSelecionada}, mas a correta era ${respostaCorreta}. 😔`;
+                    resultado.className = "resultado-box errou";
+                }
+    
+            
+                enviarResulatdo(acertou);  // envia a variavel acertou para o back
+    
+                resultado.style.opacity = 1;  // Mostra a mensagem
+                btnEnviar.classList.add("reduzido"); // Diminui o tamanho do botão "Enviar"
+                btnProxima.classList.add('visivel'); // Adiciona a classe que mostra o botão
+                btnProxima.style.display = 'inline-block'; // Exibe o botão
+            }, 200);
+        }
+    
+        // Função enviar para backend
+        function enviarResulatdo(acertou) {
+            fetch('/atualizar-pontuacao', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    acertou: acertou
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                atualizarPontuacaoNaPagina(data.pontuacao);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        } 
+               
+        // Função para avançar para a próxima questão
+        function proximaQuestao() {
+            location.reload();  // Recarrega a página para a próxima pergunta
+        }
+    </script>    
+
+</body>
+</html>

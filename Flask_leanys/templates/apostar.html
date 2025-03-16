@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apostas - LIGA ENEM</title>
+
+    <style>
+        /* Layout principal */
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            color: #333;
+            font-size: 30px;
+            text-align: center;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-family: 'Poppins';
+        }
+
+        .section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            font-size: 25px;
+            color: #444;
+        }
+
+        .section p {
+            font-size: 18px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        /* Estilo dos links e botões */
+        .topic {
+            background-color: #5c6bc0;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            text-decoration: none;
+        }
+
+        .topic:hover {
+            background-color: #3f51b5;
+            transform: translateX(5px) scale(1.03);
+        }
+
+        /* Rodapé */
+        .footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 3px;
+            font-size: 14px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <script>
+        fetch('/header')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            });
+    </script>
+
+    <!-- Seção principal -->
+    <div class="container">
+        <h2>Apostas no LIGA ENEM</h2>
+        
+        <div class="section">
+            <h3>Regras do Jogo</h3>
+            <p><strong>1. Aposta de Pontos:</strong> Antes de responder a uma questão, o jogador pode apostar uma quantidade de pontos que tenha acumulado até o momento. O valor da aposta deve ser escolhido pelo jogador e não pode ser superior ao número de pontos disponíveis.</p>
+            <p><strong>2. Como Apostar:</strong> O jogador escolhe a quantidade de pontos a ser apostada antes de selecionar uma questão. O valor será deduzido caso o jogador escolha apostar.</p>
+            <p><strong>3. Resposta Correta:</strong> Se o jogador acertar a questão, ele receberá o dobro dos pontos apostados. Por exemplo, se apostou 10 pontos e acertou a questão, ele ganhará 20 pontos de volta.</p>
+            <p><strong>4. Resposta Errada:</strong> Se o jogador errar a questão, ele perde a totalidade dos pontos apostados. Ou seja, se apostou 10 pontos e errou, perderá 10 pontos.</p>
+            <p><strong>5. Limitações:</strong> O jogador pode fazer várias apostas, mas sempre dentro dos limites do seu saldo de pontos.</p>
+            <p><strong>6. Não é Permitido Apostar Sem Pontos:</strong> Se o jogador não tiver pontos suficientes para fazer uma aposta, ele não poderá fazer a aposta naquela questão.</p>
+        </div>
+
+        <div class="section">
+            <h3>Comece a Apostar!</h3>
+            <p>Agora que você conhece as regras do jogo, está pronto para colocar seus conhecimentos à prova. A aposta é uma ótima maneira de testar seus limites e aumentar suas chances de ganhar mais pontos!</p>
+            <a href="/apostar" class="topic" style="background-color: #e67e22;">Apostar Pontos Agora</a>
+        </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <div class="footer">
+        <p>&copy; 2025 LIGA ENEM | A aprovação é Aqui!</p>
+    </div>
+
+</body>
+</html>

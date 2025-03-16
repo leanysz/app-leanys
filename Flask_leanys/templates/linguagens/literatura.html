@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Questões de Matemática - ENEM</title>
+    <title>Questões de Literatura</title>
     <style>
         /* Estilo para a questão */
         .container {
@@ -88,6 +88,14 @@
             color: white;
         }
 
+        #botoes-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
         #btn-enviar {
             width: 100%;
             padding: 15px;
@@ -97,8 +105,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            transition: background-color 0.3s ease;
-            margin-top: 20px;
+            transition: width 0.3s ease, background-color 0.3s ease;
         }
 
         #btn-enviar:disabled {
@@ -115,6 +122,32 @@
             cursor: default;  /* Impede a mudança de cursor */
         }
 
+        #btn-enviar.reduzido {
+            width: 85%;
+        }
+
+        #btn-proxima {
+            display: none;
+            width: 50px;  /* Define uma largura fixa */
+            height: 50px; /* Define uma altura fixa */
+            padding: 0;   /* Remove o padding interno para manter o formato redondo */
+            background-color: #ffffff;
+            border: none;
+            border-radius: 50%; /* Torna o botão redondo */
+            cursor: pointer;
+            margin-right: 50px;
+        }
+
+        #btn-proxima:hover {
+            background-color: #ffffff;
+        }
+
+        #btn-proxima img {
+            width: 55px;  /* Define o tamanho da imagem */
+            height: 55px; /* Define o tamanho da imagem */
+            object-fit: contain; /* Ajusta a imagem sem distorcer */ 
+        }
+
 
         /* Estilo aprimorado para o resultado */
         #resultado {
@@ -125,7 +158,7 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
             width: 50%;
-            margin-left: 20%;
+            margin-left: 17%;
         }
 
         .resultado-box {
@@ -215,17 +248,19 @@
 
 <body>
 
-    <div id="header"></div>
-    <script>
-        fetch('static/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-    </script>
+  <div id="header"></div>
+
+  <script>
+      fetch('/header')
+          .then(response => response.text())
+          .then(data => {
+              document.getElementById('header').innerHTML = data;
+          });
+  </script>
+
 
     <div class="container" data-correct-alternative="{{ questao['correctAlternative'] }}">
-        <h2>Questões de Matemática</h2>
+        <h2>Questões de Literatura</h2>
         <h3>{{ questao["title"] }}</h3>
         <p>{{ questao["context"] | safe }}</p>
         <p>{{ questao["alternativesIntroduction"] }}</p>
@@ -286,21 +321,22 @@
             </li>      
         </ul>     
 
-        <!-- Resultado Container -->
+       <!-- Resultado Container -->
         <div id="resultado" class="resultado-box">
             <span class="mensagem"></span>
         </div>
 
-        <button id="btn-enviar" class="btn btn-success mb-3" onclick="verificarResposta()" disabled>Enviar</button>
+        <!-- Contêiner para os botões -->
+        <div id="botoes-container">
+            <button id="btn-enviar" class="btn btn-success mb-3" onclick="verificarResposta()" disabled>Enviar</button>
 
-        <!-- Botão Próxima Questão -->
-        <button id="btn-proxima" class="btn btn-info" onclick="proximaQuestao()" style="display: none;">&gt; Próxima Questão</button>
-    </div>
+            <!-- Botão Próxima Questão -->
+            <button id="btn-proxima" class="btn btn-info" onclick="proximaQuestao()"><img src="static/proximo-botao.png" alt="Medalha de Ouro"></button>
+        </div>
+
 
     <script>
-        let acertosConsecutivos = 0; 
-        let errosConsecutivos = 0;
-        let pontuacao = 0;
+        let acertou = null;
         let alternativaSelecionada = null;
     
         // Função para selecionar uma alternativa
@@ -327,11 +363,13 @@
             const respostaCorreta = document.querySelector('.container').getAttribute('data-correct-alternative');
             const resultado = document.getElementById("resultado");
             const btnEnviar = document.getElementById("btn-enviar");
+            const btnProxima = document.getElementById("btn-proxima");
     
             resultado.style.opacity = 0;  // Esconde a mensagem temporariamente
     
             // 🟢 Desabilitar botão "Enviar Resposta" após clicar
-           btnEnviar.classList.add("clicado");
+            btnEnviar.classList.add("clicado");
+            btnEnviar.disabled = true;  // Desabilita o botão após clicar
     
             // Desabilitar as alternativas após resposta, mantendo a classe selecionada
             const botoes = document.querySelectorAll('.btn-alternativa');
@@ -344,67 +382,51 @@
             });
     
             setTimeout(() => {
-                let pontosAlterados = 0;
+                
                 if (alternativaSelecionada === respostaCorreta) {
-                    acertosConsecutivos++;
-                    errosConsecutivos = 0;
-    
-                    // Lógica de pontuação para acertos consecutivos
-                    if (acertosConsecutivos === 1) {
-                        pontosAlterados = 10;
-                    } else if (acertosConsecutivos === 2) {
-                        pontosAlterados = 15;
-                    } else if (acertosConsecutivos >= 3) {
-                        pontosAlterados = 20;
-                    }
-    
+                    acertou = true;
+
                     resultado.innerHTML = `<i>✔️</i> Você escolheu a alternativa ${alternativaSelecionada}, que é a correta! 🎉`;
                     resultado.className = "resultado-box acertou";
-                } else {
-                    acertosConsecutivos = 0;
-                    errosConsecutivos++;
-    
-                    // Lógica de pontuação para erros consecutivos
-                    if (errosConsecutivos === 1 && pontuacao > 0) {
-                        pontosAlterados = -5;
-                    } else if (errosConsecutivos === 2 && pontuacao > 0) {
-                        pontosAlterados = -10;
-                    } else if (errosConsecutivos >= 3 && pontuacao > 0) {
-                        pontosAlterados = -15;
-                    }
+                } 
+                
+                else {
+                    acertou = false
     
                     resultado.innerHTML = `<i>❌</i> Você escolheu a alternativa ${alternativaSelecionada}, mas a correta era ${respostaCorreta}. 😔`;
                     resultado.className = "resultado-box errou";
                 }
     
-                // Ajusta a pontuação
-                pontuacao += pontosAlterados;
-                salvarPontuacao();  // Salva a nova pontuação no backend
+            
+                enviarResulatdo(acertou);  // envia a variavel acertou para o back
     
                 resultado.style.opacity = 1;  // Mostra a mensagem
-                document.getElementById("btn-proxima").style.display = 'block';  // Mostra o botão de próxima questão
+                btnEnviar.classList.add("reduzido"); // Diminui o tamanho do botão "Enviar"
+                btnProxima.classList.add('visivel'); // Adiciona a classe que mostra o botão
+                btnProxima.style.display = 'inline-block'; // Exibe o botão
             }, 200);
         }
     
-        // Função para salvar a pontuação no backend
-        function salvarPontuacao() {
-            fetch('/salvar-pontuacao', {
+        // Função enviar para backend
+        function enviarResulatdo(acertou) {
+            fetch('/atualizar-pontuacao', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    usuario_id: 1,  // Troque pelo ID do usuário logado
-                    pontuacao: pontuacao
+                    acertou: acertou
                 })
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data.mensagem);  // Mensagem de sucesso ou erro do backend
+                atualizarPontuacaoNaPagina(data.pontuacao);
             })
-            .catch(error => console.error('Erro ao salvar a pontuação:', error));
-        }
-    
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+        } 
+               
         // Função para avançar para a próxima questão
         function proximaQuestao() {
             location.reload();  // Recarrega a página para a próxima pergunta

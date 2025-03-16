@@ -1,5 +1,5 @@
 from main import app
-from funtions import obter_questao
+from funtions import obter_questao, obter_questao_n
 from flask import render_template, request, redirect, url_for, flash, jsonify, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -175,6 +175,12 @@ def homepage():
     usuario = db.session.query(Usuario).filter_by(usuario=usuario_logado).first()
     return render_template("homepage.html" , usuario=usuario)
 
+@app.route("/apostar.html")
+def apostar():
+    usuario_logado = session.get('user')
+    usuario = db.session.query(Usuario).filter_by(usuario=usuario_logado).first()
+    return render_template("apostar.html" , usuario=usuario)
+
 @app.route("/ranking.html")
 def ranking():
     # Obtenha o usuário logado
@@ -222,66 +228,78 @@ def redacao():
 
 @app.route("/portugues.html")
 def portugues():
-    return render_template("linguagens/portugues.html")
+    questao = obter_questao("portugues")
+    return render_template("linguagens/portugues.html",  questao=questao)
 
 @app.route("/literatura.html")
 def literatura():
-    questao = obter_questao("matematica")
+    questao = obter_questao("literatura")
     return render_template("linguagens/literatura.html",  questao=questao)
 
 @app.route("/espanhol.html")
 def espanhol():
-    questao = obter_questao("matematica")
+    questao = obter_questao("espanhol")
     return render_template("linguagens/espanhol.html", questao=questao)
 
-@app.route("/ingles.html", methods=['GET', 'POST'])
+@app.route("/ingles.html")
 def ingles():
-    questao = obter_questao("matematica")
+    questao = obter_questao("ingles")
     return render_template("linguagens/ingles.html", questao=questao)
 
 @app.route("/questoes-linguagens.html")
 def questoes_l():
-    return render_template("linguagens/questoes-l.html")
+    questao = obter_questao_n("ql")
+    return render_template("linguagens/questoes-l.html", questao=questao)
 
 # humanas
 
 @app.route("/historia.html")
 def historia():
-    return render_template("humanas/historia.html")
+    questao = obter_questao("historia")
+    return render_template("humanas/historia.html", questao=questao)
 
 @app.route("/geografia.html")
 def geografia():
-    return render_template("humanas/geografia.html")
+    questao = obter_questao("geografia")
+    return render_template("humanas/geografia.html", questao=questao)
 
 @app.route("/filosofia.html")
 def filosofia():
-    return render_template("humanas/filosofia.html")
+    questao = obter_questao("filosofia")
+    return render_template("humanas/filosofia.html", questao=questao)
 
 @app.route("/sociologia.html")
 def sociologia():
-    return render_template("humanas/sociologia.html")
+    questao = obter_questao("sociologia")
+    return render_template("humanas/sociologia.html", questao=questao)
 
 @app.route("/questoes-humanas.html")
 def questoes_h():
-    return render_template("humanas/questoes-h.html")
+    questao = obter_questao_n("qh")
+    return render_template("humanas/questoes-h.html", questao=questao)
 
 # naturezas
 
 @app.route("/biologia.html")
 def biologia():
-    return render_template("naturezas/biologia.html")
+    questao = obter_questao("biologia")
+    return render_template("naturezas/biologia.html", questao=questao)
 
 @app.route("/quimica.html")
 def quimica():
-    return render_template("naturezas/quimica.html")
+    questao = obter_questao("quimica")
+    return render_template("naturezas/quimica.html", questao=questao)
 
 @app.route("/fisica.html")
 def fisica():
-    return render_template("naturezas/fisica.html")
+    questao = obter_questao("fisica")
+    return render_template("naturezas/fisica.html", questao=questao)
 
 @app.route("/questoes-naturezas.html")
 def questoes_n():
-    return render_template("naturezas/questoes-n.html")
+    questao = obter_questao_n("qn")
+    return render_template("naturezas/questoes-n.html", questao=questao)
+
 
 # matematica
 
